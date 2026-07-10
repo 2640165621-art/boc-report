@@ -734,7 +734,7 @@ const fmtK = v => v >= 10000 ? (v/10000).toFixed(1)+'万' : v >= 1000 ? (v/1000)
 // 月度考核金额
 new Chart(document.getElementById('wzMonthAmountChart'), {
     type: 'bar',
-    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '考核金额(元)', data: [20800, 48600, 5000], backgroundColor: ['#3498db','#2ecc71','#e74c3c'], borderRadius: 6, barThickness: 40 }] },
+    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '考核金额(元)', data: [20800, 48600, 5000], backgroundColor: ['#fa7516','#fa7516','#fa7516'], borderRadius: 6, barThickness: 40 }] },
     options: { responsive: true, maintainAspectRatio: false, layout: { padding: { top: 30 } }, plugins: { legend: { display: false }, datalabels: { ...dlDefaults, formatter: v => '¥'+fmtK(v) } }, scales: { y: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
 });
 
@@ -748,21 +748,21 @@ new Chart(document.getElementById('wzMonthViolChart'), {
 // 省份分布
 new Chart(document.getElementById('wzProvChart'), {
     type: 'bar',
-    data: { labels: ["宁夏", "新疆", "甘肃", "陕西"], datasets: [{ label: '考核金额(元)', data: [25800, 22800, 18800, 7000], backgroundColor: colors.slice(0,4), borderRadius: 4 }] },
+    data: { labels: ["宁夏", "新疆", "甘肃", "陕西"], datasets: [{ label: '考核金额(元)', data: [25800, 22800, 18800, 7000], backgroundColor: ['#fa7516','#fa7516','#fa7516','#fa7516'], borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+(v/10000).toFixed(1)+'万' } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
 });
 
 // 检核项金额
 new Chart(document.getElementById('wzItemAmountChart'), {
     type: 'bar',
-    data: { labels: ["强弱电间", "洽谈室", "展车5S", "消防设施", "卫生间5S", "影音会员", "试驾车5S", "展示状态"], datasets: [{ label: '合计金额(元)', data: [8000, 8000, 8000, 6000, 4000, 4000, 3000, 3000], backgroundColor: '#e74c3c', borderRadius: 4 }] },
+    data: { labels: ["强弱电间", "洽谈室", "展车5S", "消防设施", "卫生间5S", "影音会员", "试驾车5S", "展示状态"], datasets: [{ label: '合计金额(元)', data: [8000, 8000, 8000, 6000, 4000, 4000, 3000, 3000], backgroundColor: '#fa7516', borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+fmtK(v) } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(1)+'万' } } } }
 });
 
 // 检核项次数
 new Chart(document.getElementById('wzItemCountChart'), {
     type: 'bar',
-    data: { labels: ["强弱电间", "洽谈室", "展车5S", "消防设施", "卫生间5S", "影音会员", "试驾车5S", "展示状态"], datasets: [{ label: '违规次数', data: [4, 4, 4, 3, 2, 2, 3, 3], backgroundColor: '#3498db', borderRadius: 4 }] },
+    data: { labels: ["强弱电间", "洽谈室", "展车5S", "消防设施", "卫生间5S", "影音会员", "试驾车5S", "展示状态"], datasets: [{ label: '违规次数', data: [4, 4, 4, 3, 2, 2, 3, 3], backgroundColor: '#fa7516', borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4 } }, scales: { x: { beginAtZero: true } } }
 });
 </script>
