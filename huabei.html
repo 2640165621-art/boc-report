@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>华北战区 BOC明检报告（2026年4-6月）</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'Microsoft YaHei', 'Segoe UI', sans-serif; background: #f0f2f5; color: #333; line-height: 1.6; }
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.report-header { background: linear-gradient(135deg, #0f3460 0%, #16213e 50%, #1a1a2e 100%); color: white; padding: 40px; border-radius: 16px; margin-bottom: 30px; text-align: center; }
+.report-header h1 { font-size: 26px; margin-bottom: 10px; }
+.report-header .subtitle { font-size: 16px; opacity: 0.85; }
+.report-header .meta { margin-top: 15px; font-size: 13px; opacity: 0.7; }
+.section { background: white; border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.section h2 { font-size: 20px; color: #1a1a2e; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e8e8e8; }
+.section h2 span { color: #0f3460; }
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px; }
+.stat-card { background: #f8f9fa; border-radius: 10px; padding: 20px; text-align: center; border: 1px solid #e8e8e8; }
+.stat-value { font-size: 24px; font-weight: bold; color: #1a1a2e; }
+.stat-label { font-size: 13px; color: #666; margin-top: 5px; }
+.chart-container { position: relative; height: 350px; margin: 20px 0; }
+.chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 768px) { .chart-row { grid-template-columns: 1fr; } }
+.table-wrapper { overflow-x: auto; margin: 15px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: #1a1a2e; color: white; padding: 10px 12px; text-align: center; font-weight: 500; white-space: nowrap; }
+td { padding: 8px 12px; border-bottom: 1px solid #eee; text-align: center; }
+tr:hover { background: #f5f7fa; }
+tr:nth-child(even) { background: #fafbfc; }
+tr:nth-child(even):hover { background: #f0f2f5; }
+.summary-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px; padding: 20px; margin: 15px 0; }
+.summary-box h3 { margin-bottom: 10px; }
+.summary-box p { opacity: 0.95; line-height: 1.8; margin-bottom: 8px; }
+.monthly-badges { margin: 10px 0; }
+.badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 12px; margin: 2px; }
+.badge-month { background: #e8f0fe; color: #1a73e8; }
+.store-toggle { cursor: pointer; padding: 8px 15px; background: #e8f0fe; border-radius: 8px; color: #1a73e8; font-weight: 500; font-size: 14px; display: block; }
+.store-toggle:hover { background: #d2e3fc; }
+details[open] .store-toggle { border-radius: 8px 8px 0 0; }
+.store-cards-container { margin-top: 10px; }
+.store-card { background: white; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
+.store-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; cursor: pointer; background: #fff; transition: background 0.2s; }
+.store-header:hover { background: #f0f4ff; }
+.store-info { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.store-name { font-weight: 600; color: #1a1a2e; font-size: 14px; }
+.store-id { font-size: 11px; color: #888; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+.store-prov { font-size: 12px; color: #666; }
+.store-summary { display: flex; align-items: center; gap: 10px; }
+.store-month-tag { background: #e8f0fe; color: #1a73e8; padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 500; }
+.store-vc { font-size: 12px; color: #666; }
+.store-amount { font-weight: bold; color: #e74c3c; font-size: 15px; }
+.expand-icon { font-size: 10px; color: #999; transition: transform 0.3s; }
+.store-card.expanded .expand-icon { transform: rotate(180deg); }
+.store-detail { display: none; border-top: 1px solid #eee; }
+.store-card.expanded .store-detail { display: block; }
+.viol-table { font-size: 12px; margin: 0; }
+.viol-table th { background: #34495e; padding: 8px 10px; font-size: 11px; }
+.viol-table td { padding: 6px 10px; font-size: 12px; vertical-align: top; }
+.viol-row:hover { background: #fff8e1 !important; }
+.desc-cell { max-width: 250px; word-break: break-all; line-height: 1.4; }
+.footer { text-align: center; padding: 20px; color: #999; font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="report-header">
+    <h1>华北战区 BOC 明检报告</h1>
+    <div class="subtitle">2026年4月 - 6月 | 华北战区合伙人门店检核数据分析</div>
+</div>
+
+<!-- 一、战区总览 -->
+<div class="section">
+    <h2><span>一、</span>战区总览</h2>
+    <div class="stats-row">
+        <div class="stat-card"><div class="stat-value">52</div><div class="stat-label">违规次数</div></div>
+        <div class="stat-card"><div class="stat-value" style="color:#e74c3c">¥78,000</div><div class="stat-label">考核金额</div></div>
+        <div class="stat-card"><div class="stat-value">8</div><div class="stat-label">涉及门店</div></div>
+        <div class="stat-card"><div class="stat-value">¥9,750</div><div class="stat-label">店均考核</div></div>
+        <div class="stat-card"><div class="stat-value">6.9%</div><div class="stat-label">全国占比</div></div>
+    </div>
+    <div class="summary-box">
+        <h3>分析概述</h3>
+        <p>2026年4-6月期间，华北战区共涉及8家次合伙人门店，累计发现违规问题52项，考核总金额¥78,000，占全国总考核金额的6.9%。</p><p>店均考核金额为¥9,750，低于全国店均水平（¥11,956）。</p><p>从月度趋势看，5月考核金额最高（¥56,000，37项），</p><p>6月考核金额最低（¥22,000，15项），</p><p>月度波动较大，建议关注问题集中爆发的月份并加强整改跟踪。</p><p>考核金额最高的门店为极氪家丨邯郸现代国际汽车城（¥19,000），其次为极氪家丨邯郸现代国际汽车城、极氪家  鄂尔多斯铜川汽车城、极氪家 大同庞大汽车城等，建议重点关注这些门店的整改落实情况。</p><p>从问题大类来看，'车辆管理'类问题最为突出，共24项、金额¥36,000，应作为后续改进重点。</p><p>在省份分布上，河北考核金额最高（¥34,000），涉及4家门店。</p>
+    </div>
+    <div class="monthly-badges"><span class='badge badge-month'>5月: 37次 / ¥56,000</span> <span class='badge badge-month'>6月: 15次 / ¥22,000</span> </div>
+    <div class="chart-row">
+        <div><h3 style="text-align:center;margin-bottom:10px;font-size:15px">月度考核金额趋势</h3><div class="chart-container" style="height:300px"><canvas id="wzMonthAmountChart"></canvas></div></div>
+        <div><h3 style="text-align:center;margin-bottom:10px;font-size:15px">月度违规次数趋势</h3><div class="chart-container" style="height:300px"><canvas id="wzMonthViolChart"></canvas></div></div>
+    </div>
+</div>
+
+<!-- 二、省份分布 -->
+<div class="section">
+    <h2><span>二、</span>省份分布</h2>
+    <div class="chart-container" style="height:300px"><canvas id="wzProvChart"></canvas></div>
+    <div class="table-wrapper"><table>
+        <thead><tr><th>排名</th><th>省份</th><th>违规次数</th><th>涉及门店</th><th>考核金额</th></tr></thead>
+        <tbody><tr><td>1</td><td>河北</td><td>23</td><td>4</td><td style="color:#e74c3c;font-weight:bold">¥34,000</td></tr><tr><td>2</td><td>内蒙古</td><td>14</td><td>2</td><td style="color:#e74c3c;font-weight:bold">¥22,000</td></tr><tr><td>3</td><td>山西</td><td>15</td><td>2</td><td style="color:#e74c3c;font-weight:bold">¥22,000</td></tr></tbody>
+    </table></div>
+</div>
+
+<!-- 三、违规检核项分析 -->
+<div class="section">
+    <h2><span>三、</span>违规检核项分析（TOP10）</h2>
+    <div class="chart-row">
+        <div><h3 style="text-align:center;margin-bottom:10px;font-size:15px">检核项考核金额</h3><div class="chart-container" style="height:400px"><canvas id="wzItemAmountChart"></canvas></div></div>
+        <div><h3 style="text-align:center;margin-bottom:10px;font-size:15px">检核项违规次数</h3><div class="chart-container" style="height:400px"><canvas id="wzItemCountChart"></canvas></div></div>
+    </div>
+    <div class="table-wrapper"><table>
+        <thead><tr><th>排名</th><th>检核项</th><th>违规次数</th><th>涉及门店</th><th>合计金额</th></tr></thead>
+        <tbody><tr><td>1</td><td>强弱电间</td><td>4</td><td>4</td><td style="color:#e74c3c;font-weight:bold">¥8,000</td></tr><tr><td>2</td><td>消防设施</td><td>4</td><td>4</td><td style="color:#e74c3c;font-weight:bold">¥8,000</td></tr><tr><td>3</td><td>展车5S</td><td>3</td><td>3</td><td style="color:#e74c3c;font-weight:bold">¥6,000</td></tr><tr><td>4</td><td>展厅设施</td><td>3</td><td>3</td><td style="color:#e74c3c;font-weight:bold">¥6,000</td></tr><tr><td>5</td><td>影音会员</td><td>3</td><td>3</td><td style="color:#e74c3c;font-weight:bold">¥6,000</td></tr><tr><td>6</td><td>洽谈室</td><td>3</td><td>2</td><td style="color:#e74c3c;font-weight:bold">¥6,000</td></tr><tr><td>7</td><td>道具洋酒</td><td>3</td><td>3</td><td style="color:#e74c3c;font-weight:bold">¥6,000</td></tr><tr><td>8</td><td>外部地面</td><td>2</td><td>2</td><td style="color:#e74c3c;font-weight:bold">¥4,000</td></tr><tr><td>9</td><td>卫生间5S</td><td>2</td><td>2</td><td style="color:#e74c3c;font-weight:bold">¥4,000</td></tr><tr><td>10</td><td>试驾车5S</td><td>4</td><td>4</td><td style="color:#e74c3c;font-weight:bold">¥4,000</td></tr></tbody>
+    </table></div>
+</div>
+
+<!-- 四、考核金额TOP10门店 -->
+<div class="section">
+    <h2><span>四、</span>考核金额TOP10门店</h2>
+    <div class="table-wrapper"><table>
+        <thead><tr><th>排名</th><th>门店名称</th><th>省份</th><th>违规次数</th><th>考核金额</th></tr></thead>
+        <tbody><tr><td>1</td><td>极氪家丨邯郸现代国际汽车城</td><td>河北</td><td>12</td><td style="color:#e74c3c;font-weight:bold">¥19,000</td></tr><tr><td>2</td><td>极氪家  鄂尔多斯铜川汽车城</td><td>内蒙古</td><td>8</td><td style="color:#e74c3c;font-weight:bold">¥13,000</td></tr><tr><td>3</td><td>极氪家 大同庞大汽车城</td><td>山西</td><td>8</td><td style="color:#e74c3c;font-weight:bold">¥13,000</td></tr><tr><td>4</td><td>极氪家 邢台蓝池物流园店</td><td>河北</td><td>6</td><td style="color:#e74c3c;font-weight:bold">¥9,000</td></tr><tr><td>5</td><td>极氪家 包头稀土路</td><td>内蒙古</td><td>6</td><td style="color:#e74c3c;font-weight:bold">¥9,000</td></tr><tr><td>6</td><td>极氪家 运城机场大道</td><td>山西</td><td>7</td><td style="color:#e74c3c;font-weight:bold">¥9,000</td></tr><tr><td>7</td><td>极氪空间 | 邯郸万象汇</td><td>河北</td><td>3</td><td style="color:#e74c3c;font-weight:bold">¥4,000</td></tr><tr><td>8</td><td>极氪家 廊坊安次汽车园</td><td>河北</td><td>2</td><td style="color:#e74c3c;font-weight:bold">¥2,000</td></tr></tbody>
+    </table></div>
+</div>
+
+<!-- 五、门店违规明细 -->
+<div class="section">
+    <h2><span>五、</span>门店违规明细</h2>
+    <p style="color:#666;font-size:13px;margin-bottom:15px">门店按月份排序，月份内按考核金额降序排列。点击门店行可展开查看每项违规的问题描述和违规说明。</p>
+    
+        <div class="store-card">
+            <div class="store-header" onclick="this.parentElement.classList.toggle('expanded')">
+                <div class="store-info">
+                    <span class="store-name">极氪家丨邯郸现代国际汽车城</span>
+                    <span class="store-id">MHEB2295H</span>
+                    <span class="store-prov">河北</span>
+                </div>
+                <div class="store-summary">
+                    <span class="store-month-tag">5月</span>
+                    <span class="store-vc">12项</span>
+                    <span class="store-amount">¥19,000</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+            </div>
+            <div class="store-detail">
+                <table class="viol-table">
+                    <thead><tr>
+                        <th style="width:100px">检核项</th>
+                        <th style="width:200px">BOC题干</th>
+                        <th>问题描述(扣分原因)</th>
+                        <th>违规说明</th>
+                        <th style="width:90px">考核金额</th>
+                    </tr></thead>
+                    <tbody><tr class="viol-row">
+                <td>外部地面</td>
+                <td>外部地面-外部地面</td>
+                <td class="desc-cell">场地地面整体不清洁、有明显破损、有杂物堆放</td>
+                <td class="desc-cell">外部地面不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>强弱电间</td>
+                <td>EHS-强弱电间</td>
+                <td class="desc-cell">配电间或配电箱附近有易燃可燃杂物堆积</td>
+                <td class="desc-cell">强弱电间不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>插板使用</td>
+                <td>EHS-插板使用</td>
+                <td class="desc-cell">前区裸露在外的充电线未使用压线板/卷线盘，压线板不干净、不整齐</td>
+                <td class="desc-cell">插板使用不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>卫生间</td>
+                <td>卫生间-卫生间</td>
+                <td class="desc-cell">香薰&amp;amp;香薰条、洗手液、护手霜、擦手纸、厕所卫生纸不齐全</td>
+                <td class="desc-cell">卫生间不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>卫生间5S</td>
+                <td>卫生间-卫生间5S</td>
+                <td class="desc-cell">未保持卫生间干净整洁卫生，有异味，有清洁工具在可视范围内</td>
+                <td class="desc-cell">卫生间5S不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>展厅设施</td>
+                <td>展厅设施-展厅设施</td>
+                <td class="desc-cell">多媒体设备、室内Logo灯营业期间未正常开启，有破损、屏幕有雪花屏</td>
+                <td class="desc-cell">门店设备设施故障未及时报修或超过15天未维修完成</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>试驾车5S</td>
+                <td>试驾车维护-试驾车5S</td>
+                <td class="desc-cell">试驾车外观、内饰不整洁，车辆乘坐区、后备箱不干净有杂物，车内有非原有车辆属性物件</td>
+                <td class="desc-cell">试驾车5S不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥1,000</td>
+            </tr><tr class="viol-row">
+                <td>软件版本</td>
+                <td>试驾车维护-软件版本</td>
+                <td class="desc-cell">OTA软件版本不是最新，夜间自动升级未更新</td>
+                <td class="desc-cell">车机版本未在售最新版本，任务下发后超过24小时未及时更新</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥1,000</td>
+            </tr><tr class="viol-row">
+                <td>车辆账号</td>
+                <td>展车维护-车辆账号</td>
+                <td class="desc-cell">车辆账号名称车型不统一</td>
+                <td class="desc-cell">车机账号未按规范设置</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>软件版本</td>
+                <td>软件版本</td>
+                <td class="desc-cell">OTA软件版本不是最新版，夜间自动升级未开启</td>
+                <td class="desc-cell">车机版本未在售最新版本，任务下发后超过24小时未及时更新</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥1,000</td>
+            </tr><tr class="viol-row">
+                <td>影音会员</td>
+                <td>展车维护-影音会员</td>
+                <td class="desc-cell">展车主屏爱奇艺和QQ音乐会员/网易云音乐会员(2选1)未保持正常登录</td>
+                <td class="desc-cell">车机影音会员未保持正常登录</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>内训检核</td>
+                <td>人员形象-内训检核</td>
+                <td class="desc-cell">8分</td>
+                <td class="desc-cell">内训检核得分：8分（满分10分，&lt;6分为不达标）</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥0</td>
+            </tr></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="store-card">
+            <div class="store-header" onclick="this.parentElement.classList.toggle('expanded')">
+                <div class="store-info">
+                    <span class="store-name">极氪家  鄂尔多斯铜川汽车城</span>
+                    <span class="store-id">MNM2324H</span>
+                    <span class="store-prov">内蒙古</span>
+                </div>
+                <div class="store-summary">
+                    <span class="store-month-tag">5月</span>
+                    <span class="store-vc">8项</span>
+                    <span class="store-amount">¥13,000</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+            </div>
+            <div class="store-detail">
+                <table class="viol-table">
+                    <thead><tr>
+                        <th style="width:100px">检核项</th>
+                        <th style="width:200px">BOC题干</th>
+                        <th>问题描述(扣分原因)</th>
+                        <th>违规说明</th>
+                        <th style="width:90px">考核金额</th>
+                    </tr></thead>
+                    <tbody><tr class="viol-row">
+                <td>消防设施</td>
+                <td>EHS-消防设施</td>
+                <td class="desc-cell">灭火器、消火栓、疏散指示未启用、外观有损坏，灭火器未在有效期内，压力指数未在绿色区域，每个灭火器、消防栓未配有点检卡，月度检查记录有缺失</td>
+                <td class="desc-cell">消防设施不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>强弱电间</td>
+                <td>EHS-强弱电间</td>
+                <td class="desc-cell">配电间或配电箱附近有易燃可燃杂物堆积</td>
+                <td class="desc-cell">强弱电间不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>洽谈室</td>
+                <td>洽谈区-洽谈室（洽谈桌）</td>
+                <td class="desc-cell">IMAC未靠墙放置、屏幕不常亮，未保持家具复位，未保持整洁</td>
+                <td class="desc-cell">洽谈室不达标（iMac/桌面陈列/整洁度等）</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>洽谈室</td>
+                <td>洽谈区-洽谈室</td>
+                <td class="desc-cell">洽谈桌陈列物品不符合标准要求</td>
+                <td class="desc-cell">洽谈室不达标（iMac/桌面陈列/整洁度等）</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>试驾车5S</td>
+                <td>试驾车维护-试驾车5S</td>
+                <td class="desc-cell">试驾车外观、内饰不整洁，车辆乘坐区、后备箱不干净有杂物，车内有非原有车辆属性物件</td>
+                <td class="desc-cell">试驾车5S不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥1,000</td>
+            </tr><tr class="viol-row">
+                <td>道具洋酒</td>
+                <td>展车物料-道具洋酒</td>
+                <td class="desc-cell">【009】冰箱未平躺放置、【光辉】未竖向放置、【9X】未竖向放置1~2瓶，有其他饮品，LOGO未正向朝前&amp;nbsp;</td>
+                <td class="desc-cell">道具洋酒未按标准摆放</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>影音会员</td>
+                <td>展车维护-影音会员</td>
+                <td class="desc-cell">展车主屏爱奇艺和QQ音乐会员/网易云音乐会员(2选1)未保持正常登录</td>
+                <td class="desc-cell">车机影音会员未保持正常登录</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>内训检核</td>
+                <td>人员形象-内训检核</td>
+                <td class="desc-cell">7.5分</td>
+                <td class="desc-cell">内训检核得分：5分（满分10分，&lt;6分为不达标）</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥0</td>
+            </tr></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="store-card">
+            <div class="store-header" onclick="this.parentElement.classList.toggle('expanded')">
+                <div class="store-info">
+                    <span class="store-name">极氪家 邢台蓝池物流园店</span>
+                    <span class="store-id">MHEB2225H</span>
+                    <span class="store-prov">河北</span>
+                </div>
+                <div class="store-summary">
+                    <span class="store-month-tag">5月</span>
+                    <span class="store-vc">6项</span>
+                    <span class="store-amount">¥9,000</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+            </div>
+            <div class="store-detail">
+                <table class="viol-table">
+                    <thead><tr>
+                        <th style="width:100px">检核项</th>
+                        <th style="width:200px">BOC题干</th>
+                        <th>问题描述(扣分原因)</th>
+                        <th>违规说明</th>
+                        <th style="width:90px">考核金额</th>
+                    </tr></thead>
+                    <tbody><tr class="viol-row">
+                <td>外部地面</td>
+                <td>外部地面-外部地面</td>
+                <td class="desc-cell">专属停车位（含试驾车车位）有杂物、垃圾，停车位标线及标识文字不清晰完整</td>
+                <td class="desc-cell">外部地面不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>洽谈室</td>
+                <td>洽谈区-洽谈室（洽谈桌）</td>
+                <td class="desc-cell">IMAC未靠墙放置、屏幕不常亮，未保持家具复位，未保持整洁</td>
+                <td class="desc-cell">洽谈室不达标（iMac/桌面陈列/整洁度等）</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>展厅设施</td>
+                <td>展厅设施-展厅设施</td>
+                <td class="desc-cell">多媒体设备、室内Logo灯营业期间未正常开启，有破损、屏幕有雪花屏</td>
+                <td class="desc-cell">门店设备设施故障未及时报修或超过15天未维修完成</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>道具洋酒</td>
+                <td>展车物料-道具洋酒</td>
+                <td class="desc-cell">【009】冰箱未平躺放置、【光辉】未竖向放置、【9X】未竖向放置1~2瓶，有其他饮品，LOGO未正向朝前&amp;nbsp;</td>
+                <td class="desc-cell">道具洋酒未按标准摆放</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>展示状态</td>
+                <td>展车维护-展示状态</td>
+                <td class="desc-cell">车辆日行灯未开启，展车电池电量少于30%-80%</td>
+                <td class="desc-cell">展车状态不符合展示要求（展车模式/电量/展示状态等）</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥1,000</td>
+            </tr><tr class="viol-row">
+                <td>内训检核</td>
+                <td>人员形象-内训检核</td>
+                <td class="desc-cell">9分</td>
+                <td class="desc-cell">内训检核得分：9分（满分10分，&lt;6分为不达标）</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥0</td>
+            </tr></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="store-card">
+            <div class="store-header" onclick="this.parentElement.classList.toggle('expanded')">
+                <div class="store-info">
+                    <span class="store-name">极氪家 包头稀土路</span>
+                    <span class="store-id">MNM2259H</span>
+                    <span class="store-prov">内蒙古</span>
+                </div>
+                <div class="store-summary">
+                    <span class="store-month-tag">5月</span>
+                    <span class="store-vc">6项</span>
+                    <span class="store-amount">¥9,000</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+            </div>
+            <div class="store-detail">
+                <table class="viol-table">
+                    <thead><tr>
+                        <th style="width:100px">检核项</th>
+                        <th style="width:200px">BOC题干</th>
+                        <th>问题描述(扣分原因)</th>
+                        <th>违规说明</th>
+                        <th style="width:90px">考核金额</th>
+                    </tr></thead>
+                    <tbody><tr class="viol-row">
+                <td>消防设施</td>
+                <td>EHS-消防设施</td>
+                <td class="desc-cell">灭火器、消火栓、疏散指示未启用、外观有损坏，灭火器未在有效期内，压力指数未在绿色区域，每个灭火器、消防栓未配有点检卡，月度检查记录有缺失</td>
+                <td class="desc-cell">消防设施不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>强弱电间</td>
+                <td>EHS-强弱电间</td>
+                <td class="desc-cell">安全出口内外畅通有杂物堆放，有存放易燃易爆、危险品物品，配电箱/弱电柜门未保持关闭状态</td>
+                <td class="desc-cell">强弱电间不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>行车记录仪</td>
+                <td>试驾车维护-行车记录仪</td>
+                <td class="desc-cell">试驾车行车记录仪未开启，不能查看历史视频</td>
+                <td class="desc-cell">行车记录仪功能未开启</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥1,000</td>
+            </tr><tr class="viol-row">
+                <td>车辆真实使用</td>
+                <td>试驾车维护-车辆真实使用</td>
+                <td class="desc-cell">试驾车未真实做试乘试驾业务，有挪作他用</td>
+                <td class="desc-cell">未正确使用试驾车，挪作他用等情况</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>影音会员</td>
+                <td>展车维护-影音会员</td>
+                <td class="desc-cell">展车主屏爱奇艺和QQ音乐会员/网易云音乐会员(2选1)未保持正常登录</td>
+                <td class="desc-cell">车机影音会员未保持正常登录</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>内训检核</td>
+                <td>人员形象-内训检核</td>
+                <td class="desc-cell">5.5分</td>
+                <td class="desc-cell">内训检核得分：5分（满分10分，&lt;6分为不达标）</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥0</td>
+            </tr></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="store-card">
+            <div class="store-header" onclick="this.parentElement.classList.toggle('expanded')">
+                <div class="store-info">
+                    <span class="store-name">极氪空间 | 邯郸万象汇</span>
+                    <span class="store-id">MHEB2456M</span>
+                    <span class="store-prov">河北</span>
+                </div>
+                <div class="store-summary">
+                    <span class="store-month-tag">5月</span>
+                    <span class="store-vc">3项</span>
+                    <span class="store-amount">¥4,000</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+            </div>
+            <div class="store-detail">
+                <table class="viol-table">
+                    <thead><tr>
+                        <th style="width:100px">检核项</th>
+                        <th style="width:200px">BOC题干</th>
+                        <th>问题描述(扣分原因)</th>
+                        <th>违规说明</th>
+                        <th style="width:90px">考核金额</th>
+                    </tr></thead>
+                    <tbody><tr class="viol-row">
+                <td>试驾车车况</td>
+                <td>试驾车维护-试驾车车况</td>
+                <td class="desc-cell">车辆车联网未开通，混动油量少于1/4，纯电电量少于50%</td>
+                <td class="desc-cell">试驾车车况不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥1,000</td>
+            </tr><tr class="viol-row">
+                <td>香氛</td>
+                <td>试驾车维护-香氛</td>
+                <td class="desc-cell">香氛功能不可正常开启，香氛显示无余量</td>
+                <td class="desc-cell">香氛功能不可正常开启或无余量</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥1,000</td>
+            </tr><tr class="viol-row">
+                <td>展车5S</td>
+                <td>展车维护-展车5S</td>
+                <td class="desc-cell">未清除展车内外部所有保护膜、座椅套、能耗标识贴纸等展车外观、内饰不整洁，车辆引擎仓、乘坐区、后备箱不干净有杂物&amp;nbsp;</td>
+                <td class="desc-cell">未清除展车内外部保护膜、座椅套、能耗标识贴纸等，展车外观、内饰不整洁</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="store-card">
+            <div class="store-header" onclick="this.parentElement.classList.toggle('expanded')">
+                <div class="store-info">
+                    <span class="store-name">极氪家 廊坊安次汽车园</span>
+                    <span class="store-id">MHEB2226H</span>
+                    <span class="store-prov">河北</span>
+                </div>
+                <div class="store-summary">
+                    <span class="store-month-tag">5月</span>
+                    <span class="store-vc">2项</span>
+                    <span class="store-amount">¥2,000</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+            </div>
+            <div class="store-detail">
+                <table class="viol-table">
+                    <thead><tr>
+                        <th style="width:100px">检核项</th>
+                        <th style="width:200px">BOC题干</th>
+                        <th>问题描述(扣分原因)</th>
+                        <th>违规说明</th>
+                        <th style="width:90px">考核金额</th>
+                    </tr></thead>
+                    <tbody><tr class="viol-row">
+                <td>展厅设施</td>
+                <td>展厅设施-展厅设施</td>
+                <td class="desc-cell">多媒体设备、室内Logo灯营业期间未正常开启，有破损、屏幕有雪花屏</td>
+                <td class="desc-cell">门店设备设施故障未及时报修或超过15天未维修完成</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>内训检核</td>
+                <td>人员形象-内训检核</td>
+                <td class="desc-cell">9分</td>
+                <td class="desc-cell">内训检核得分：9分（满分10分，&lt;6分为不达标）</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥0</td>
+            </tr></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="store-card">
+            <div class="store-header" onclick="this.parentElement.classList.toggle('expanded')">
+                <div class="store-info">
+                    <span class="store-name">极氪家 大同庞大汽车城</span>
+                    <span class="store-id">MSX2227H</span>
+                    <span class="store-prov">山西</span>
+                </div>
+                <div class="store-summary">
+                    <span class="store-month-tag">6月</span>
+                    <span class="store-vc">8项</span>
+                    <span class="store-amount">¥13,000</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+            </div>
+            <div class="store-detail">
+                <table class="viol-table">
+                    <thead><tr>
+                        <th style="width:100px">检核项</th>
+                        <th style="width:200px">BOC题干</th>
+                        <th>问题描述(扣分原因)</th>
+                        <th>违规说明</th>
+                        <th style="width:90px">考核金额</th>
+                    </tr></thead>
+                    <tbody><tr class="viol-row">
+                <td>消防设施</td>
+                <td>EHS-消防设施</td>
+                <td class="desc-cell">压力指数未在绿色区域，消防栓未配点检卡</td>
+                <td class="desc-cell">消防设施不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>强弱电间</td>
+                <td>EHS-强弱电间</td>
+                <td class="desc-cell">弱电柜门未关闭</td>
+                <td class="desc-cell">强弱电间有杂物/安全出口不畅</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>展厅地面</td>
+                <td>展厅展示区-展厅地面</td>
+                <td class="desc-cell">展车下面有明显灰尘</td>
+                <td class="desc-cell">展厅地面不干净不整洁</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>卫生间5S</td>
+                <td>卫生间-卫生间5S</td>
+                <td class="desc-cell">有杂物</td>
+                <td class="desc-cell">卫生间不整洁/有异味</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>试驾车5S</td>
+                <td>试驾车维护-试驾车5S</td>
+                <td class="desc-cell">8x副驾驶车门有半瓶水</td>
+                <td class="desc-cell">试驾车清洁不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥1,000</td>
+            </tr><tr class="viol-row">
+                <td>道具洋酒</td>
+                <td>展车物料-道具洋酒</td>
+                <td class="desc-cell">009道具未朝前</td>
+                <td class="desc-cell">道具洋酒未按标准摆放</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>展车5S</td>
+                <td>展车维护-展车5S</td>
+                <td class="desc-cell">8x，9x前引擎仓不干净</td>
+                <td class="desc-cell">展车清洁不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>内训检核</td>
+                <td>人员形象-内训检核</td>
+                <td class="desc-cell">3分</td>
+                <td class="desc-cell">内训检核得分：3分（满分10分，&lt;6分为不达标）</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥0</td>
+            </tr></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="store-card">
+            <div class="store-header" onclick="this.parentElement.classList.toggle('expanded')">
+                <div class="store-info">
+                    <span class="store-name">极氪家 运城机场大道</span>
+                    <span class="store-id">MSX2237H</span>
+                    <span class="store-prov">山西</span>
+                </div>
+                <div class="store-summary">
+                    <span class="store-month-tag">6月</span>
+                    <span class="store-vc">7项</span>
+                    <span class="store-amount">¥9,000</span>
+                    <span class="expand-icon">▼</span>
+                </div>
+            </div>
+            <div class="store-detail">
+                <table class="viol-table">
+                    <thead><tr>
+                        <th style="width:100px">检核项</th>
+                        <th style="width:200px">BOC题干</th>
+                        <th>问题描述(扣分原因)</th>
+                        <th>违规说明</th>
+                        <th style="width:90px">考核金额</th>
+                    </tr></thead>
+                    <tbody><tr class="viol-row">
+                <td>消防设施</td>
+                <td>EHS-消防设施</td>
+                <td class="desc-cell">灭火器压力值没在绿色区域</td>
+                <td class="desc-cell">消防设施不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>试驾车5S</td>
+                <td>试驾车维护-试驾车5S</td>
+                <td class="desc-cell">9x、8x车门有开封的水</td>
+                <td class="desc-cell">试驾车清洁不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥1,000</td>
+            </tr><tr class="viol-row">
+                <td>试驾车车况</td>
+                <td>试驾车维护-试驾车车况</td>
+                <td class="desc-cell">9x非原厂脚垫</td>
+                <td class="desc-cell">试驾车车况不佳</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥1,000</td>
+            </tr><tr class="viol-row">
+                <td>行车记录仪</td>
+                <td>试驾车维护-行车记录仪</td>
+                <td class="desc-cell">7x记录仪未开启</td>
+                <td class="desc-cell">行车记录仪功能未开启</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥1,000</td>
+            </tr><tr class="viol-row">
+                <td>车身物料</td>
+                <td>展车物料-车身物料</td>
+                <td class="desc-cell">001试驾车置换贴有气泡</td>
+                <td class="desc-cell">车身物料未按标准摆放</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>展车5S</td>
+                <td>展车维护-展车5S</td>
+                <td class="desc-cell">8x有客户遗留的物品，001前引擎仓不干净</td>
+                <td class="desc-cell">展车清洁不达标</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥2,000</td>
+            </tr><tr class="viol-row">
+                <td>内训检核</td>
+                <td>人员形象-内训检核</td>
+                <td class="desc-cell">8分</td>
+                <td class="desc-cell">内训检核得分：8分（满分10分，&lt;6分为不达标）</td>
+                <td style="white-space:nowrap;color:#e74c3c;font-weight:bold">¥0</td>
+            </tr></tbody>
+                </table>
+            </div>
+        </div>
+</div>
+
+<div class="footer">华北战区 BOC明检报告 | 数据周期：2026年4月-6月 | 生成时间：2026年7月8日</div>
+</div>
+
+<script>
+Chart.register(ChartDataLabels);
+const colors = ['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#34495e','#16a085','#c0392b'];
+const dlDefaults = { display: true, color: '#333', font: { size: 11, weight: 'bold' }, anchor: 'end', align: 'end', offset: 4 };
+const dlInside = { display: true, color: '#fff', font: { size: 11, weight: 'bold' }, anchor: 'center', align: 'center' };
+const fmtK = v => v >= 10000 ? (v/10000).toFixed(1)+'万' : v >= 1000 ? (v/1000).toFixed(1)+'K' : v;
+
+// 月度考核金额
+new Chart(document.getElementById('wzMonthAmountChart'), {
+    type: 'bar',
+    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '考核金额(元)', data: [0, 56000, 22000], backgroundColor: ['#3498db','#2ecc71','#e74c3c'], borderRadius: 6, barThickness: 40 }] },
+    options: { responsive: true, maintainAspectRatio: false, layout: { padding: { top: 30 } }, plugins: { legend: { display: false }, datalabels: { ...dlDefaults, formatter: v => '¥'+fmtK(v) } }, scales: { y: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
+});
+
+// 月度违规次数
+new Chart(document.getElementById('wzMonthViolChart'), {
+    type: 'line',
+    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '违规次数', data: [0, 37, 15], borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.1)', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: '#e74c3c' }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#e74c3c', font: { size: 13, weight: 'bold' }, anchor: 'end', align: 'top', offset: 6 } }, scales: { y: { beginAtZero: true } } }
+});
+
+// 省份分布
+new Chart(document.getElementById('wzProvChart'), {
+    type: 'bar',
+    data: { labels: ["河北", "内蒙古", "山西"], datasets: [{ label: '考核金额(元)', data: [34000, 22000, 22000], backgroundColor: colors.slice(0,3), borderRadius: 4 }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+(v/10000).toFixed(1)+'万' } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
+});
+
+// 检核项金额
+new Chart(document.getElementById('wzItemAmountChart'), {
+    type: 'bar',
+    data: { labels: ["强弱电间", "消防设施", "展车5S", "展厅设施", "影音会员", "洽谈室", "道具洋酒", "外部地面"], datasets: [{ label: '合计金额(元)', data: [8000, 8000, 6000, 6000, 6000, 6000, 6000, 4000], backgroundColor: '#e74c3c', borderRadius: 4 }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+fmtK(v) } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(1)+'万' } } } }
+});
+
+// 检核项次数
+new Chart(document.getElementById('wzItemCountChart'), {
+    type: 'bar',
+    data: { labels: ["强弱电间", "消防设施", "展车5S", "展厅设施", "影音会员", "洽谈室", "道具洋酒", "外部地面"], datasets: [{ label: '违规次数', data: [4, 4, 3, 3, 3, 3, 3, 2], backgroundColor: '#3498db', borderRadius: 4 }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4 } }, scales: { x: { beginAtZero: true } } }
+});
+</script>
+</body>
+</html>
