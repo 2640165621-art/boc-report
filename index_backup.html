@@ -11,7 +11,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, 'Microsoft YaHei', 'Segoe UI', sans-serif; background: #f0f2f5; color: #333; line-height: 1.6; }
 .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-.report-header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 40px; border-radius: 16px; margin-bottom: 30px; text-align: center; }
+.report-header { background: #000000; color: white; padding: 40px; border-radius: 16px; margin-bottom: 30px; text-align: center; }
 .report-header h1 { font-size: 28px; margin-bottom: 10px; }
 .report-header .subtitle { font-size: 16px; opacity: 0.85; }
 .report-header .meta { margin-top: 15px; font-size: 13px; opacity: 0.7; }
@@ -27,7 +27,77 @@ body { font-family: -apple-system, 'Microsoft YaHei', 'Segoe UI', sans-serif; ba
 
 .chart-container { position: relative; height: 350px; margin: 20px 0; }
 .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-@media (max-width: 768px) { .chart-row { grid-template-columns: 1fr; } }
+/* ===== Responsive Design ===== */
+@media (max-width: 1024px) {
+  .container { padding: 15px; }
+  .report-header { padding: 30px 20px; }
+  .report-header h1 { font-size: 22px; }
+  .section { padding: 20px; }
+  .stats-row { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .stat-card { padding: 15px; }
+  .stat-value { font-size: 20px; }
+  .chart-container { height: 280px !important; }
+}
+@media (max-width: 768px) {
+  body { font-size: 14px; }
+  .container { padding: 10px; }
+  .report-header { padding: 20px 15px; border-radius: 10px; margin-bottom: 20px; }
+  .report-header h1 { font-size: 20px; margin-bottom: 8px; }
+  .report-header .subtitle { font-size: 14px; }
+  .report-header .meta { font-size: 12px; }
+  .section { padding: 15px; margin-bottom: 15px; border-radius: 10px; }
+  .section h2 { font-size: 18px; margin-bottom: 15px; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .stat-card { padding: 12px; }
+  .stat-value { font-size: 18px; }
+  .stat-label { font-size: 12px; }
+  .summary-box { padding: 15px; }
+  .summary-box p { font-size: 13px; line-height: 1.6; }
+  .chart-container { height: 250px !important; margin: 15px 0; }
+  .chart-row { grid-template-columns: 1fr; gap: 15px; }
+  .table-wrapper { margin: 10px 0; }
+  table { font-size: 12px; }
+  th { padding: 8px 6px; font-size: 11px; }
+  td { padding: 6px 8px; font-size: 12px; }
+  .desc-cell { max-width: 150px; font-size: 11px; }
+  .store-header { padding: 10px 12px; flex-wrap: wrap; }
+  .store-info { gap: 6px; }
+  .store-name { font-size: 13px; }
+  .store-id { font-size: 10px; }
+  .store-prov { font-size: 11px; }
+  .store-summary { gap: 6px; }
+  .store-month-tag { font-size: 11px; padding: 2px 6px; }
+  .store-vc { font-size: 11px; }
+  .store-amount { font-size: 13px; }
+  .viol-table { font-size: 11px; }
+  .viol-table th { padding: 6px 8px; font-size: 10px; }
+  .viol-table td { padding: 5px 8px; font-size: 11px; }
+  .footer { padding: 15px; font-size: 11px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 8px; }
+  .report-header { padding: 15px 10px; }
+  .report-header h1 { font-size: 18px; }
+  .report-header .subtitle { font-size: 12px; }
+  .section { padding: 12px; }
+  .section h2 { font-size: 16px; }
+  .stats-row { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .stat-card { padding: 10px; }
+  .stat-value { font-size: 16px; }
+  .stat-label { font-size: 11px; }
+  .summary-box { padding: 12px; }
+  .summary-box p { font-size: 12px; }
+  .chart-container { height: 220px !important; }
+  table { font-size: 11px; }
+  th { padding: 6px 4px; font-size: 10px; }
+  td { padding: 5px 6px; font-size: 11px; }
+  .desc-cell { max-width: 120px; font-size: 10px; }
+  .store-header { padding: 8px 10px; }
+  .store-name { font-size: 12px; }
+  .store-amount { font-size: 12px; }
+  .viol-table th { padding: 5px 6px; font-size: 9px; }
+  .viol-table td { padding: 4px 6px; font-size: 10px; }
+}
 
 .table-wrapper { overflow-x: auto; margin: 15px 0; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -7282,7 +7352,7 @@ const fmtK = v => v >= 10000 ? (v/10000).toFixed(1)+'万' : v >= 1000 ? (v/1000)
 // 月度考核金额
 new Chart(document.getElementById('monthAmountChart'), {
     type: 'bar',
-    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '考核金额(元)', data: [393000, 370800, 372000], backgroundColor: ['#3498db','#2ecc71','#e74c3c'], borderRadius: 6, barThickness: 40 }] },
+    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '考核金额(元)', data: [393000, 370800, 372000], backgroundColor: ['#fa7516','#fa7516','#fa7516'], borderRadius: 6, barThickness: 40 }] },
     options: { responsive: true, maintainAspectRatio: false, layout: { padding: { top: 30 } }, plugins: { legend: { display: false }, datalabels: { ...dlDefaults, formatter: v => '¥'+fmtK(v) } }, scales: { y: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
 });
 
@@ -7297,8 +7367,8 @@ new Chart(document.getElementById('monthViolationChart'), {
 new Chart(document.getElementById('warZoneChart'), {
     type: 'bar',
     data: { labels: ["中南战区", "中部战区", "东鲁战区", "西南战区", "广海战区", "华北战区", "西北战区", "浙江战区", "江苏战区"], datasets: [
-        { label: '考核金额(元)', data: [224400, 215400, 194200, 131600, 111600, 78000, 74400, 49400, 23000], backgroundColor: '#e74c3c', borderRadius: 4 },
-        { label: '违规次数', data: [153, 144, 126, 90, 77, 52, 50, 33, 16], backgroundColor: '#3498db', borderRadius: 4 }
+        { label: '考核金额(元)', data: [224400, 215400, 194200, 131600, 111600, 78000, 74400, 49400, 23000], backgroundColor: '#fa7516', borderRadius: 4 },
+        { label: '违规次数', data: [153, 144, 126, 90, 77, 52, 50, 33, 16], backgroundColor: '#fa7516', borderRadius: 4 }
     ] },
     options: { responsive: true, maintainAspectRatio: false, scales: { x: { ticks: { maxRotation: 45 } }, y: { beginAtZero: true } }, plugins: { legend: { position: 'top' }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'end', offset: 2, formatter: (v,ctx) => ctx.datasetIndex===0 ? '¥'+fmtK(v) : v } } }
 });
@@ -7314,8 +7384,8 @@ new Chart(document.getElementById('warZonePieChart'), {
 new Chart(document.getElementById('warZoneScatterChart'), {
     type: 'bar',
     data: { labels: ["中南战区", "中部战区", "东鲁战区", "西南战区", "广海战区", "华北战区", "西北战区", "浙江战区", "江苏战区"], datasets: [
-        { label: '涉及门店数', data: [17, 17, 15, 13, 9, 8, 8, 3, 2], backgroundColor: '#2ecc71', borderRadius: 4 },
-        { label: '违规次数', data: [153, 144, 126, 90, 77, 52, 50, 33, 25, 16], backgroundColor: '#f39c12', borderRadius: 4 }
+        { label: '涉及门店数', data: [17, 17, 15, 13, 9, 8, 8, 3, 2], backgroundColor: '#fa7516', borderRadius: 4 },
+        { label: '违规次数', data: [153, 144, 126, 90, 77, 52, 50, 33, 25, 16], backgroundColor: '#fa7516', borderRadius: 4 }
     ] },
     options: { responsive: true, maintainAspectRatio: false, scales: { x: { ticks: { maxRotation: 45 } }, y: { beginAtZero: true } }, plugins: { legend: { position: 'top' }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'end', offset: 2 } } }
 });
@@ -7323,28 +7393,28 @@ new Chart(document.getElementById('warZoneScatterChart'), {
 // 省份
 new Chart(document.getElementById('provinceChart'), {
     type: 'bar',
-    data: { labels: ["山东", "广东", "湖南", "安徽", "河南", "湖北", "福建", "浙江", "广西", "四川", "河北", "宁夏", "江苏", "新疆", "内蒙古", "山西", "黑龙江省", "江西", "甘肃", "云南", "贵州", "湖南省", "江西省", "海南", "福建省", "四川省", "陕西"], datasets: [{ label: '考核金额(元)', data: [172400, 102600, 125600, 93600, 65800, 56000, 50000, 49400, 47000, 45800, 34000, 25800, 23000, 22800, 22000, 22000, 21800, 20000, 18800, 17000, 13000, 10800, 9000, 9000, 9000, 8800, 7000], backgroundColor: colors.slice(0,27), borderRadius: 4 }] },
+    data: { labels: ["山东", "广东", "湖南", "安徽", "河南", "湖北", "福建", "浙江", "广西", "四川", "河北", "宁夏", "江苏", "新疆", "内蒙古", "山西", "黑龙江省", "江西", "甘肃", "云南", "贵州", "湖南省", "江西省", "海南", "福建省", "四川省", "陕西"], datasets: [{ label: '考核金额(元)', data: [172400, 102600, 125600, 93600, 65800, 56000, 50000, 49400, 47000, 45800, 34000, 25800, 23000, 22800, 22000, 22000, 21800, 20000, 18800, 17000, 13000, 10800, 9000, 9000, 9000, 8800, 7000], backgroundColor: ['#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516'], borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+(v/10000).toFixed(1)+'万' } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
 });
 
 // 检核项金额
 new Chart(document.getElementById('itemAmountChart'), {
     type: 'bar',
-    data: { labels: ["展车5S", "影音会员", "消防设施", "洽谈室", "强弱电间", "车身物料", "试驾车5S", "车辆账号", "道具洋酒", "软件版本", "展示状态", "卫生间5S", "展厅地面", "卫生间", "外部设施"], datasets: [{ label: '合计金额(元)', data: [102000, 92000, 80000, 74000, 60000, 60000, 56000, 48000, 43000, 42000, 39000, 38000, 32000, 30000, 28000], backgroundColor: '#e74c3c', borderRadius: 4 }] },
+    data: { labels: ["展车5S", "影音会员", "消防设施", "洽谈室", "强弱电间", "车身物料", "试驾车5S", "车辆账号", "道具洋酒", "软件版本", "展示状态", "卫生间5S", "展厅地面", "卫生间", "外部设施"], datasets: [{ label: '合计金额(元)', data: [102000, 92000, 80000, 74000, 60000, 60000, 56000, 48000, 43000, 42000, 39000, 38000, 32000, 30000, 28000], backgroundColor: '#fa7516', borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+fmtK(v) } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(1)+'万' } } } }
 });
 
 // 检核项次数
 new Chart(document.getElementById('itemCountChart'), {
     type: 'bar',
-    data: { labels: ["展车5S", "影音会员", "消防设施", "洽谈室", "强弱电间", "车身物料", "试驾车5S", "车辆账号", "道具洋酒", "软件版本", "展示状态", "卫生间5S", "展厅地面", "卫生间", "外部设施"], datasets: [{ label: '违规次数', data: [51, 46, 56, 40, 32, 30, 26, 24, 39, 20, 42, 19, 16, 15, 14], backgroundColor: '#3498db', borderRadius: 4 }] },
+    data: { labels: ["展车5S", "影音会员", "消防设施", "洽谈室", "强弱电间", "车身物料", "试驾车5S", "车辆账号", "道具洋酒", "软件版本", "展示状态", "卫生间5S", "展厅地面", "卫生间", "外部设施"], datasets: [{ label: '违规次数', data: [51, 46, 56, 40, 32, 30, 26, 24, 39, 20, 42, 19, 16, 15, 14], backgroundColor: '#fa7516', borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4 } }, scales: { x: { beginAtZero: true } } }
 });
 
 // TOP15门店
 new Chart(document.getElementById('topStoresChart'), {
     type: 'bar',
-    data: { labels: ["极氪家  岳阳临港国际汽", "极氪家 六安东方汽车城", "极氪家 阜阳汽贸物流园", "极氪家 怀化国际汽车城", "极氪家 德州晶华大道", "大庆祥阁汽车城", "极氪家 茂名茂南大道", "极氪家丨邯郸现代国际汽车", "极氪家 周口北环太清路", "极氪家 娄底湘阳街", "极氪家  菏泽定陶汽车小", "极氪家  丽水岩泉汽车城", "极氪家 清远港鸿汽车城", "极氪家 | 南阳北京大道", "极氪家 衢州浙西汽车城"], datasets: [{ label: '考核金额(元)', data: [30000, 26000, 23000, 23000, 22800, 21800, 19000, 19000, 18000, 18000, 18000, 17800, 17000, 17000, 16800], backgroundColor: '#e74c3c', borderRadius: 4 }] },
+    data: { labels: ["极氪家  岳阳临港国际汽", "极氪家 六安东方汽车城", "极氪家 阜阳汽贸物流园", "极氪家 怀化国际汽车城", "极氪家 德州晶华大道", "大庆祥阁汽车城", "极氪家 茂名茂南大道", "极氪家丨邯郸现代国际汽车", "极氪家 周口北环太清路", "极氪家 娄底湘阳街", "极氪家  菏泽定陶汽车小", "极氪家  丽水岩泉汽车城", "极氪家 清远港鸿汽车城", "极氪家 | 南阳北京大道", "极氪家 衢州浙西汽车城"], datasets: [{ label: '考核金额(元)', data: [30000, 26000, 23000, 23000, 22800, 21800, 19000, 19000, 18000, 18000, 18000, 17800, 17000, 17000, 16800], backgroundColor: '#fa7516', borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+fmtK(v) } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/1000).toFixed(0)+'K' } } } }
 });
 
