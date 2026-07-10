@@ -149,9 +149,9 @@ details[open] .store-toggle { border-radius: 8px 8px 0 0; }
     <h2><span>一、</span>战区总览</h2>
     <div class="stats-row">
         <div class="stat-card"><div class="stat-value">102</div><div class="stat-label">违规次数</div></div>
-        <div class="stat-card"><div class="stat-value" style="color:#e74c3c">¥145,400</div></div>
+        <div class="stat-card"><div class="stat-value" style="color:#e74c3c">¥145,400</div><div class="stat-label">考核金额</div></div>
         <div class="stat-card"><div class="stat-value">12</div><div class="stat-label">涉及门店</div></div>
-        <div class="stat-card"><div class="stat-value">¥12,117</div></div>
+        <div class="stat-card"><div class="stat-value">¥12,117</div><div class="stat-label">店均考核</div></div>
         <div class="stat-card"><div class="stat-value">12.8%</div><div class="stat-label">全国占比</div></div>
     </div>
     <div class="summary-box">
@@ -1182,7 +1182,7 @@ new Chart(document.getElementById('wzProvChart'), {
 new Chart(document.getElementById('wzItemAmountChart'), {
     type: 'bar',
     data: { labels: ["消防设施", "展车5S", "车身物料", "展示状态", "影音会员", "道具洋酒", "洽谈室", "试驾车5S"], datasets: [{ label: '合计金额(元)', data: [12000, 12000, 8000, 8000, 8000, 6000, 6000, 5000], backgroundColor: '#fa7516', borderRadius: 4 }] },
-    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+fmtK(v) } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(1)+'万' } } } }
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, layout: { padding: { right: 55 } }, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+fmtK(v) } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(1)+'万' } } } }
 });
 
 // 检核项次数
