@@ -11,7 +11,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, 'Microsoft YaHei', 'Segoe UI', sans-serif; background: #f0f2f5; color: #333; line-height: 1.6; }
 .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-.report-header { background: #000000; color: white; padding: 40px; border-radius: 16px; margin-bottom: 30px; text-align: center; }
+.report-header { background: linear-gradient(135deg, #0f3460 0%, #16213e 50%, #1a1a2e 100%); color: white; padding: 40px; border-radius: 16px; margin-bottom: 30px; text-align: center; }
 .report-header h1 { font-size: 26px; margin-bottom: 10px; }
 .report-header .subtitle { font-size: 16px; opacity: 0.85; }
 .report-header .meta { margin-top: 15px; font-size: 13px; opacity: 0.7; }
@@ -32,9 +32,9 @@ td { padding: 8px 12px; border-bottom: 1px solid #eee; text-align: center; }
 tr:hover { background: #f5f7fa; }
 tr:nth-child(even) { background: #fafbfc; }
 tr:nth-child(even):hover { background: #f0f2f5; }
-.summary-box { background: #f0f0f0; color: #333; border-radius: 10px; padding: 20px; margin: 15px 0; }
+.summary-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px; padding: 20px; margin: 15px 0; }
 .summary-box h3 { margin-bottom: 10px; }
-.summary-box p { opacity: 1; line-height: 1.8; margin-bottom: 8px; }
+.summary-box p { opacity: 0.95; line-height: 1.8; margin-bottom: 8px; }
 .monthly-badges { margin: 10px 0; }
 .badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 12px; margin: 2px; }
 .badge-month { background: #e8f0fe; color: #1a73e8; }
@@ -1527,7 +1527,7 @@ const fmtK = v => v >= 10000 ? (v/10000).toFixed(1)+'万' : v >= 1000 ? (v/1000)
 // 月度考核金额
 new Chart(document.getElementById('wzMonthAmountChart'), {
     type: 'bar',
-    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '考核金额(元)', data: [124400, 59000, 41000], backgroundColor: ['#fa7516','#fa7516','#fa7516'], borderRadius: 6, barThickness: 40 }] },
+    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '考核金额(元)', data: [124400, 59000, 41000], backgroundColor: ['#3498db','#2ecc71','#e74c3c'], borderRadius: 6, barThickness: 40 }] },
     options: { responsive: true, maintainAspectRatio: false, layout: { padding: { top: 30 } }, plugins: { legend: { display: false }, datalabels: { ...dlDefaults, formatter: v => '¥'+fmtK(v) } }, scales: { y: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
 });
 
@@ -1541,7 +1541,7 @@ new Chart(document.getElementById('wzMonthViolChart'), {
 // 省份分布
 new Chart(document.getElementById('wzProvChart'), {
     type: 'bar',
-    data: { labels: ["湖南", "福建", "江西", "湖南省", "江西省", "福建省"], datasets: [{ label: '考核金额(元)', data: [125600, 50000, 20000, 10800, 9000, 9000], backgroundColor: ['#fa7516','#fa7516','#fa7516','#fa7516','#fa7516','#fa7516'], borderRadius: 4 }] },
+    data: { labels: ["湖南", "福建", "江西", "湖南省", "江西省", "福建省"], datasets: [{ label: '考核金额(元)', data: [125600, 50000, 20000, 10800, 9000, 9000], backgroundColor: colors.slice(0,6), borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+(v/10000).toFixed(1)+'万' } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
 });
 
@@ -1555,7 +1555,7 @@ new Chart(document.getElementById('wzItemAmountChart'), {
 // 检核项次数
 new Chart(document.getElementById('wzItemCountChart'), {
     type: 'bar',
-    data: { labels: ["影音会员", "消防设施", "车辆账号", "外部设施", "道具洋酒", "车身物料", "洽谈室", "软件版本"], datasets: [{ label: '违规次数', data: [12, 8, 7, 6, 6, 6, 6, 11], backgroundColor: '#fa7516', borderRadius: 4 }] },
+    data: { labels: ["影音会员", "消防设施", "车辆账号", "外部设施", "道具洋酒", "车身物料", "洽谈室", "软件版本"], datasets: [{ label: '违规次数', data: [12, 8, 7, 6, 6, 6, 6, 11], backgroundColor: '#3498db', borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4 } }, scales: { x: { beginAtZero: true } } }
 });
 </script>
