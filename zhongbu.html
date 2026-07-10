@@ -25,6 +25,79 @@ body { font-family: -apple-system, 'Microsoft YaHei', 'Segoe UI', sans-serif; ba
 .chart-container { position: relative; height: 350px; margin: 20px 0; }
 .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 @media (max-width: 768px) { .chart-row { grid-template-columns: 1fr; } }
+/* 平板端适配 (768px - 1024px) */
+@media (max-width: 1024px) {
+    .container { padding: 15px; }
+    .report-header { padding: 30px 20px; }
+    .report-header h1 { font-size: 22px; }
+    .section { padding: 20px; }
+    .stats-row { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+    .stat-card { padding: 15px; }
+    .stat-value { font-size: 20px; }
+    .chart-container { height: 280px; }
+}
+/* 手机端适配 (< 768px) */
+@media (max-width: 768px) {
+    body { font-size: 14px; }
+    .container { padding: 10px; }
+    .report-header { padding: 20px 15px; border-radius: 10px; margin-bottom: 20px; }
+    .report-header h1 { font-size: 20px; margin-bottom: 8px; }
+    .report-header .subtitle { font-size: 14px; }
+    .report-header .meta { font-size: 12px; }
+    .section { padding: 15px; margin-bottom: 15px; border-radius: 10px; }
+    .section h2 { font-size: 18px; margin-bottom: 15px; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .stat-card { padding: 12px; }
+    .stat-value { font-size: 18px; }
+    .stat-label { font-size: 12px; }
+    .summary-box { padding: 15px; }
+    .summary-box p { font-size: 13px; line-height: 1.6; }
+    .chart-container { height: 250px; margin: 15px 0; }
+    .chart-row { gap: 15px; }
+    .table-wrapper { margin: 10px 0; }
+    table { font-size: 12px; }
+    th { padding: 8px 6px; font-size: 11px; }
+    td { padding: 6px 8px; font-size: 12px; }
+    .desc-cell { max-width: 150px; font-size: 11px; }
+    .store-header { padding: 10px 12px; flex-wrap: wrap; }
+    .store-info { gap: 6px; }
+    .store-name { font-size: 13px; }
+    .store-id { font-size: 10px; }
+    .store-prov { font-size: 11px; }
+    .store-summary { gap: 6px; }
+    .store-month-tag { font-size: 11px; padding: 2px 6px; }
+    .store-vc { font-size: 11px; }
+    .store-amount { font-size: 13px; }
+    .viol-table { font-size: 11px; }
+    .viol-table th { padding: 6px 8px; font-size: 10px; }
+    .viol-table td { padding: 5px 8px; font-size: 11px; }
+    .footer { padding: 15px; font-size: 11px; }
+}
+/* 超小屏幕适配 (< 480px) */
+@media (max-width: 480px) {
+    .container { padding: 8px; }
+    .report-header { padding: 15px 10px; }
+    .report-header h1 { font-size: 18px; }
+    .report-header .subtitle { font-size: 12px; }
+    .section { padding: 12px; }
+    .section h2 { font-size: 16px; }
+    .stats-row { grid-template-columns: 1fr 1fr; gap: 6px; }
+    .stat-card { padding: 10px; }
+    .stat-value { font-size: 16px; }
+    .stat-label { font-size: 11px; }
+    .summary-box { padding: 12px; }
+    .summary-box p { font-size: 12px; }
+    .chart-container { height: 220px; }
+    table { font-size: 11px; }
+    th { padding: 6px 4px; font-size: 10px; }
+    td { padding: 5px 6px; font-size: 11px; }
+    .desc-cell { max-width: 120px; font-size: 10px; }
+    .store-header { padding: 8px 10px; }
+    .store-name { font-size: 12px; }
+    .store-amount { font-size: 12px; }
+    .viol-table th { padding: 5px 6px; font-size: 9px; }
+    .viol-table td { padding: 4px 6px; font-size: 10px; }
+}
 .table-wrapper { overflow-x: auto; margin: 15px 0; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 th { background: #1a1a2e; color: white; padding: 10px 12px; text-align: center; font-weight: 500; white-space: nowrap; }
