@@ -11,7 +11,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, 'Microsoft YaHei', 'Segoe UI', sans-serif; background: #f0f2f5; color: #333; line-height: 1.6; }
 .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-.report-header { background: linear-gradient(135deg, #0f3460 0%, #16213e 50%, #1a1a2e 100%); color: white; padding: 40px; border-radius: 16px; margin-bottom: 30px; text-align: center; }
+.report-header { background: #000000; color: white; padding: 40px; border-radius: 16px; margin-bottom: 30px; text-align: center; }
 .report-header h1 { font-size: 26px; margin-bottom: 10px; }
 .report-header .subtitle { font-size: 16px; opacity: 0.85; }
 .report-header .meta { margin-top: 15px; font-size: 13px; opacity: 0.7; }
@@ -24,7 +24,77 @@ body { font-family: -apple-system, 'Microsoft YaHei', 'Segoe UI', sans-serif; ba
 .stat-label { font-size: 13px; color: #666; margin-top: 5px; }
 .chart-container { position: relative; height: 350px; margin: 20px 0; }
 .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-@media (max-width: 768px) { .chart-row { grid-template-columns: 1fr; } }
+/* ===== Responsive Design ===== */
+@media (max-width: 1024px) {
+  .container { padding: 15px; }
+  .report-header { padding: 30px 20px; }
+  .report-header h1 { font-size: 22px; }
+  .section { padding: 20px; }
+  .stats-row { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .stat-card { padding: 15px; }
+  .stat-value { font-size: 20px; }
+  .chart-container { height: 280px !important; }
+}
+@media (max-width: 768px) {
+  body { font-size: 14px; }
+  .container { padding: 10px; }
+  .report-header { padding: 20px 15px; border-radius: 10px; margin-bottom: 20px; }
+  .report-header h1 { font-size: 20px; margin-bottom: 8px; }
+  .report-header .subtitle { font-size: 14px; }
+  .report-header .meta { font-size: 12px; }
+  .section { padding: 15px; margin-bottom: 15px; border-radius: 10px; }
+  .section h2 { font-size: 18px; margin-bottom: 15px; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .stat-card { padding: 12px; }
+  .stat-value { font-size: 18px; }
+  .stat-label { font-size: 12px; }
+  .summary-box { padding: 15px; }
+  .summary-box p { font-size: 13px; line-height: 1.6; }
+  .chart-container { height: 250px !important; margin: 15px 0; }
+  .chart-row { grid-template-columns: 1fr; gap: 15px; }
+  .table-wrapper { margin: 10px 0; }
+  table { font-size: 12px; }
+  th { padding: 8px 6px; font-size: 11px; }
+  td { padding: 6px 8px; font-size: 12px; }
+  .desc-cell { max-width: 150px; font-size: 11px; }
+  .store-header { padding: 10px 12px; flex-wrap: wrap; }
+  .store-info { gap: 6px; }
+  .store-name { font-size: 13px; }
+  .store-id { font-size: 10px; }
+  .store-prov { font-size: 11px; }
+  .store-summary { gap: 6px; }
+  .store-month-tag { font-size: 11px; padding: 2px 6px; }
+  .store-vc { font-size: 11px; }
+  .store-amount { font-size: 13px; }
+  .viol-table { font-size: 11px; }
+  .viol-table th { padding: 6px 8px; font-size: 10px; }
+  .viol-table td { padding: 5px 8px; font-size: 11px; }
+  .footer { padding: 15px; font-size: 11px; }
+}
+@media (max-width: 480px) {
+  .container { padding: 8px; }
+  .report-header { padding: 15px 10px; }
+  .report-header h1 { font-size: 18px; }
+  .report-header .subtitle { font-size: 12px; }
+  .section { padding: 12px; }
+  .section h2 { font-size: 16px; }
+  .stats-row { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .stat-card { padding: 10px; }
+  .stat-value { font-size: 16px; }
+  .stat-label { font-size: 11px; }
+  .summary-box { padding: 12px; }
+  .summary-box p { font-size: 12px; }
+  .chart-container { height: 220px !important; }
+  table { font-size: 11px; }
+  th { padding: 6px 4px; font-size: 10px; }
+  td { padding: 5px 6px; font-size: 11px; }
+  .desc-cell { max-width: 120px; font-size: 10px; }
+  .store-header { padding: 8px 10px; }
+  .store-name { font-size: 12px; }
+  .store-amount { font-size: 12px; }
+  .viol-table th { padding: 5px 6px; font-size: 9px; }
+  .viol-table td { padding: 4px 6px; font-size: 10px; }
+}
 .table-wrapper { overflow-x: auto; margin: 15px 0; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
 th { background: #1a1a2e; color: white; padding: 10px 12px; text-align: center; font-weight: 500; white-space: nowrap; }
@@ -857,7 +927,7 @@ const fmtK = v => v >= 10000 ? (v/10000).toFixed(1)+'万' : v >= 1000 ? (v/1000)
 // 月度考核金额
 new Chart(document.getElementById('wzMonthAmountChart'), {
     type: 'bar',
-    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '考核金额(元)', data: [19000, 72600, 20000], backgroundColor: ['#3498db','#2ecc71','#e74c3c'], borderRadius: 6, barThickness: 40 }] },
+    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '考核金额(元)', data: [19000, 72600, 20000], backgroundColor: ['#fa7516','#fa7516','#fa7516'], borderRadius: 6, barThickness: 40 }] },
     options: { responsive: true, maintainAspectRatio: false, layout: { padding: { top: 30 } }, plugins: { legend: { display: false }, datalabels: { ...dlDefaults, formatter: v => '¥'+fmtK(v) } }, scales: { y: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
 });
 
@@ -871,21 +941,21 @@ new Chart(document.getElementById('wzMonthViolChart'), {
 // 省份分布
 new Chart(document.getElementById('wzProvChart'), {
     type: 'bar',
-    data: { labels: ["广东", "海南"], datasets: [{ label: '考核金额(元)', data: [102600, 9000], backgroundColor: colors.slice(0,2), borderRadius: 4 }] },
+    data: { labels: ["广东", "海南"], datasets: [{ label: '考核金额(元)', data: [102600, 9000], backgroundColor: ['#fa7516','#fa7516'], borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+(v/10000).toFixed(1)+'万' } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
 });
 
 // 检核项金额
 new Chart(document.getElementById('wzItemAmountChart'), {
     type: 'bar',
-    data: { labels: ["消防设施", "展车5S", "车身物料", "展示状态", "影音会员", "道具洋酒", "洽谈室", "试驾车5S"], datasets: [{ label: '合计金额(元)', data: [12000, 12000, 8000, 8000, 8000, 6000, 6000, 5000], backgroundColor: '#e74c3c', borderRadius: 4 }] },
+    data: { labels: ["消防设施", "展车5S", "车身物料", "展示状态", "影音会员", "道具洋酒", "洽谈室", "试驾车5S"], datasets: [{ label: '合计金额(元)', data: [12000, 12000, 8000, 8000, 8000, 6000, 6000, 5000], backgroundColor: '#fa7516', borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+fmtK(v) } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(1)+'万' } } } }
 });
 
 // 检核项次数
 new Chart(document.getElementById('wzItemCountChart'), {
     type: 'bar',
-    data: { labels: ["消防设施", "展车5S", "车身物料", "展示状态", "影音会员", "道具洋酒", "洽谈室", "试驾车5S"], datasets: [{ label: '违规次数', data: [6, 6, 4, 8, 4, 3, 3, 5], backgroundColor: '#3498db', borderRadius: 4 }] },
+    data: { labels: ["消防设施", "展车5S", "车身物料", "展示状态", "影音会员", "道具洋酒", "洽谈室", "试驾车5S"], datasets: [{ label: '违规次数', data: [6, 6, 4, 8, 4, 3, 3, 5], backgroundColor: '#fa7516', borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4 } }, scales: { x: { beginAtZero: true } } }
 });
 </script>
