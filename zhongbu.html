@@ -1553,12 +1553,6 @@ new Chart(document.getElementById('wzMonthViolChart'), {
     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#e74c3c', font: { size: 13, weight: 'bold' }, anchor: 'end', align: 'top', offset: 6 } }, scales: { y: { beginAtZero: true } } }
 });
 
-// 检核项次数
-new Chart(document.getElementById('wzItemCountChart'), {
-    type: 'bar',
-    data: { labels: ["展车5S", "影音会员", "洽谈室", "强弱电间", "软件版本", "试驾车5S", "车辆账号", "道具洋酒"], datasets: [{ label: '违规次数', data: [10, 10, 7, 7, 12, 11, 5, 5], backgroundColor: '#fa7516', borderRadius: 4 }] },
-    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4 } }, scales: { x: { beginAtZero: true } } }
-});
 </script>
 </body>
 </html>
