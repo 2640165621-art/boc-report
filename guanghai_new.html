@@ -170,7 +170,6 @@ details[open] .store-toggle { border-radius: 8px 8px 0 0; }
 <!-- 二、省份分布 -->
 <div class="section">
     <h2><span>二、</span>省份分布</h2>
-    <div class="chart-container" style="height:300px"><canvas id="wzProvChart"></canvas></div>
     <div class="table-wrapper"><table>
         <thead><tr><th>排名</th><th>省份</th><th>违规次数</th><th>涉及门店</th><th>考核金额</th></tr></thead>
         <tbody><tr><td>1</td><td>广东</td><td>71</td><td>8</td><td style="color:#e74c3c;font-weight:bold">¥102,600</td></tr><tr><td>2</td><td>海南</td><td>6</td><td>1</td><td style="color:#e74c3c;font-weight:bold">¥9,000</td></tr></tbody>
@@ -938,13 +937,6 @@ new Chart(document.getElementById('wzMonthViolChart'), {
     type: 'line',
     data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '违规次数', data: [13, 51, 13], borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.1)', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: '#e74c3c' }] },
     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#e74c3c', font: { size: 13, weight: 'bold' }, anchor: 'end', align: 'top', offset: 6 } }, scales: { y: { beginAtZero: true } } }
-});
-
-// 省份分布
-new Chart(document.getElementById('wzProvChart'), {
-    type: 'bar',
-    data: { labels: ["广东", "海南"], datasets: [{ label: '考核金额(元)', data: [102600, 9000], backgroundColor: ['#fa7516','#fa7516'], borderRadius: 4 }] },
-    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+(v/10000).toFixed(1)+'万' } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
 });
 
 // 检核项金额
