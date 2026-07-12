@@ -1606,12 +1606,6 @@ new Chart(document.getElementById('wzMonthViolChart'), {
     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#e74c3c', font: { size: 13, weight: 'bold' }, anchor: 'end', align: 'top', offset: 6 } }, scales: { y: { beginAtZero: true } } }
 });
 
-// 检核项次数
-new Chart(document.getElementById('wzItemCountChart'), {
-    type: 'bar',
-    data: { labels: ["影音会员", "消防设施", "车辆账号", "外部设施", "道具洋酒", "车身物料", "洽谈室", "软件版本"], datasets: [{ label: '违规次数', data: [12, 8, 7, 6, 6, 6, 6, 11], backgroundColor: '#fa7516', borderRadius: 4 }] },
-    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4 } }, scales: { x: { beginAtZero: true } } }
-});
 </script>
 </body>
 </html>
