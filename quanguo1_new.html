@@ -7344,10 +7344,9 @@ new Chart(document.getElementById('monthViolationChart'), {
 new Chart(document.getElementById('warZoneChart'), {
     type: 'bar',
     data: { labels: ["中南战区", "中部战区", "东鲁战区", "西南战区", "广海战区", "华北战区", "西北战区", "浙江战区", "江苏战区"], datasets: [
-        { label: '考核金额(元)', data: [224400, 215400, 194200, 131600, 111600, 78000, 74400, 49400, 23000], backgroundColor: '#e74c3c', borderRadius: 4 },
-        { label: '违规次数', data: [153, 144, 126, 90, 77, 52, 50, 33, 16], backgroundColor: '#3498db', borderRadius: 4 }
+        { label: '考核金额(元)', data: [224400, 215400, 194200, 131600, 111600, 78000, 74400, 49400, 23000], backgroundColor: '#e74c3c', borderRadius: 4 }
     ] },
-    options: { responsive: true, maintainAspectRatio: false, scales: { x: { ticks: { maxRotation: 45 } }, y: { beginAtZero: true } }, plugins: { legend: { position: 'top' }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'end', offset: 2, formatter: (v,ctx) => ctx.datasetIndex===0 ? '¥'+fmtK(v) : v } } }
+    options: { responsive: true, maintainAspectRatio: false, scales: { x: { ticks: { maxRotation: 45 } }, y: { beginAtZero: true } }, plugins: { legend: { position: 'top' }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'end', offset: 2, formatter: v => '¥'+fmtK(v) } } }
 });
 
 // 战区饼图
