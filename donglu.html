@@ -1385,7 +1385,7 @@ new Chart(document.getElementById('wzMonthAmountChart'), {
 new Chart(document.getElementById('wzMonthViolChart'), {
     type: 'line',
     data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '进店次数', data: [4, 3, 8], borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.1)', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: '#e74c3c' }] },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#e74c3c', font: { size: 13, weight: 'bold' }, anchor: 'end', align: 'top', offset: 6 } }, scales: { y: { beginAtZero: true } } }
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#e74c3c', font: { size: 13, weight: 'bold' }, anchor: 'end', align: 'top', offset: 6 } }, scales: { y: { beginAtZero: true, max: 12 } } }
 });
 
 </script>
