@@ -163,7 +163,7 @@ details[open] .store-toggle { border-radius: 8px 8px 0 0; }
     <div class="monthly-badges"><span class='badge badge-month'>4月: 84次 / ¥124,400</span> <span class='badge badge-month'>5月: 44次 / ¥59,000</span> <span class='badge badge-month'>6月: 25次 / ¥41,000</span> </div>
     <div class="chart-row">
         <div><h3 style="text-align:center;margin-bottom:10px;font-size:15px">月度考核金额趋势</h3><div class="chart-container" style="height:300px"><canvas id="wzMonthAmountChart"></canvas></div></div>
-        <div><h3 style="text-align:center;margin-bottom:10px;font-size:15px">月度违规次数趋势</h3><div class="chart-container" style="height:300px"><canvas id="wzMonthViolChart"></canvas></div></div>
+        <div><h3 style="text-align:center;margin-bottom:10px;font-size:15px">月度进店次数</h3><div class="chart-container" style="height:300px"><canvas id="wzMonthViolChart"></canvas></div></div>
     </div>
 </div>
 
@@ -1599,10 +1599,10 @@ new Chart(document.getElementById('wzMonthAmountChart'), {
     options: { responsive: true, maintainAspectRatio: false, layout: { padding: { top: 30 } }, plugins: { legend: { display: false }, datalabels: { ...dlDefaults, formatter: v => '¥'+fmtK(v) } }, scales: { y: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
 });
 
-// 月度违规次数
+// 月度进店次数
 new Chart(document.getElementById('wzMonthViolChart'), {
     type: 'line',
-    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '违规次数', data: [84, 44, 25], borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.1)', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: '#e74c3c' }] },
+    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '进店次数', data: [8, 6, 3], borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.1)', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: '#e74c3c' }] },
     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#e74c3c', font: { size: 13, weight: 'bold' }, anchor: 'end', align: 'top', offset: 6 } }, scales: { y: { beginAtZero: true } } }
 });
 
