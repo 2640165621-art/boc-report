@@ -208,49 +208,6 @@ tr:nth-child(even):hover { background: #f0f2f5; }
         <div><h3 style="text-align:center;margin-bottom:10px;font-size:15px">战区考核金额占比</h3><div class="chart-container" style="height:400px"><canvas id="combinedPieChart"></canvas></div></div>
     </div>
 </div>
-</div>
-
-<script>
-Chart.register(ChartDataLabels);
-const colors = ['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#34495e','#16a085','#c0392b'];
-const dlDefaults = { display: true, color: '#333', font: { size: 11, weight: 'bold' }, anchor: 'end', align: 'end', offset: 4 };
-const fmtK = v => v >= 10000 ? (v/10000).toFixed(1)+'万' : v >= 1000 ? (v/1000).toFixed(1)+'K' : v;
-
-// === 总览月度图表 ===
-new Chart(document.getElementById('combinedMonthAmountChart'), {
-    type: 'bar',
-    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '考核金额(元)', data: [33800, 72600, 54600], backgroundColor: ['#fa7516','#fa7516','#fa7516'], borderRadius: 6, barThickness: 40 }] },
-    options: { responsive: true, maintainAspectRatio: false, layout: { padding: { top: 30 } }, plugins: { legend: { display: false }, datalabels: { ...dlDefaults, formatter: v => '¥'+fmtK(v) } }, scales: { y: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
-});
-
-new Chart(document.getElementById('combinedMonthViolChart'), {
-    type: 'line',
-    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '进店次数', data: [2, 6, 4], borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.1)', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: '#e74c3c' }] },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#e74c3c', font: { size: 13, weight: 'bold' }, anchor: 'end', align: 'top', offset: 6 } }, scales: { y: { beginAtZero: true, max: 12 } } }
-});
-
-
-
-
-
-// === 合并门店排名图表 ===
-new Chart(document.getElementById('combinedStoreChart'), {
-    type: 'bar',
-    data: { labels: ["极氪家 茂名茂南大道", "极氪家 丽水岩泉汽车城", "极氪家 清远港鸿汽车城", "极氪家 衢州浙西汽车城", "极氪家 舟山翔达汽车城", "极氪家 汕头高新区店", "极氪家 阳江新江东路", "极氪家  韶关韶南大道", "极氪家 揭阳环市北路", "极氪家 | 梅州春天汽车城", "极氪家 三亚诚越汽车产业园", "汕头 万象城"], datasets: [{ label: '考核金额(元)', data: [19000, 17800, 17000, 16800, 14800, 12800, 12000, 11800, 11000, 11000, 9000, 8000], backgroundColor: ["#e74c3c", "#3498db", "#e74c3c", "#3498db", "#3498db", "#e74c3c", "#e74c3c", "#e74c3c", "#e74c3c", "#e74c3c", "#e74c3c", "#e74c3c"], borderRadius: 4 }] },
-    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, labels: { generateLabels: function(ctx) { return [{text: '广海战区', fillStyle: '#e74c3c'}, {text: '浙江战区', fillStyle: '#3498db'}]; } } }, datalabels: { display: true, color: '#333', font: { size: 9, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+fmtK(v) } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
-});
-
-// === 战区占比饼图 ===
-new Chart(document.getElementById('combinedPieChart'), {
-    type: 'doughnut',
-    data: { labels: ['广海战区', '浙江战区'], datasets: [{ data: [111600, 49400], backgroundColor: ['#e74c3c', '#3498db'], borderWidth: 2, borderColor: '#fff' }] },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { size: 14 }, padding: 20 } }, datalabels: { display: true, color: '#fff', font: { size: 13, weight: 'bold' }, formatter: v => '¥'+(v/10000).toFixed(1)+'万' } } }
-});
-</script>
-</body>
-</html>
-
-
 <div class="sub-header">
     <h2>广海战区详情</h2>
     <div class="sub-subtitle">违规77次 | 考核金额¥111,600 | 涉及9家门店</div>
@@ -1319,3 +1276,43 @@ new Chart(document.getElementById('combinedPieChart'), {
 </div>
 
 
+</div>
+<script>
+Chart.register(ChartDataLabels);
+const colors = ['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#34495e','#16a085','#c0392b'];
+const dlDefaults = { display: true, color: '#333', font: { size: 11, weight: 'bold' }, anchor: 'end', align: 'end', offset: 4 };
+const fmtK = v => v >= 10000 ? (v/10000).toFixed(1)+'万' : v >= 1000 ? (v/1000).toFixed(1)+'K' : v;
+
+// === 总览月度图表 ===
+new Chart(document.getElementById('combinedMonthAmountChart'), {
+    type: 'bar',
+    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '考核金额(元)', data: [33800, 72600, 54600], backgroundColor: ['#fa7516','#fa7516','#fa7516'], borderRadius: 6, barThickness: 40 }] },
+    options: { responsive: true, maintainAspectRatio: false, layout: { padding: { top: 30 } }, plugins: { legend: { display: false }, datalabels: { ...dlDefaults, formatter: v => '¥'+fmtK(v) } }, scales: { y: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
+});
+
+new Chart(document.getElementById('combinedMonthViolChart'), {
+    type: 'line',
+    data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '进店次数', data: [2, 6, 4], borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.1)', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: '#e74c3c' }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#e74c3c', font: { size: 13, weight: 'bold' }, anchor: 'end', align: 'top', offset: 6 } }, scales: { y: { beginAtZero: true, max: 12 } } }
+});
+
+
+
+
+
+// === 合并门店排名图表 ===
+new Chart(document.getElementById('combinedStoreChart'), {
+    type: 'bar',
+    data: { labels: ["极氪家 茂名茂南大道", "极氪家 丽水岩泉汽车城", "极氪家 清远港鸿汽车城", "极氪家 衢州浙西汽车城", "极氪家 舟山翔达汽车城", "极氪家 汕头高新区店", "极氪家 阳江新江东路", "极氪家  韶关韶南大道", "极氪家 揭阳环市北路", "极氪家 | 梅州春天汽车城", "极氪家 三亚诚越汽车产业园", "汕头 万象城"], datasets: [{ label: '考核金额(元)', data: [19000, 17800, 17000, 16800, 14800, 12800, 12000, 11800, 11000, 11000, 9000, 8000], backgroundColor: ["#e74c3c", "#3498db", "#e74c3c", "#3498db", "#3498db", "#e74c3c", "#e74c3c", "#e74c3c", "#e74c3c", "#e74c3c", "#e74c3c", "#e74c3c"], borderRadius: 4 }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, labels: { generateLabels: function(ctx) { return [{text: '广海战区', fillStyle: '#e74c3c'}, {text: '浙江战区', fillStyle: '#3498db'}]; } } }, datalabels: { display: true, color: '#333', font: { size: 9, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+fmtK(v) } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
+});
+
+// === 战区占比饼图 ===
+new Chart(document.getElementById('combinedPieChart'), {
+    type: 'doughnut',
+    data: { labels: ['广海战区', '浙江战区'], datasets: [{ data: [111600, 49400], backgroundColor: ['#e74c3c', '#3498db'], borderWidth: 2, borderColor: '#fff' }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { size: 14 }, padding: 20 } }, datalabels: { display: true, color: '#fff', font: { size: 13, weight: 'bold' }, formatter: v => '¥'+(v/10000).toFixed(1)+'万' } } }
+});
+</script>
+</body>
+</html>
