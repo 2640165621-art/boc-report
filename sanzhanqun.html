@@ -3092,7 +3092,7 @@ const fmtK = v => v >= 10000 ? (v/10000).toFixed(1)+'万' : v >= 1000 ? (v/1000)
 new Chart(document.getElementById('combinedMonthAmountChart'), {
     type: 'bar',
     data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '考核金额(元)', data: [160000, 176600, 93800], backgroundColor: ['#fa7516','#fa7516','#fa7516'], borderRadius: 6, barThickness: 40 }] },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 11, weight: 'bold' }, anchor: 'end', align: 'end', offset: 4, formatter: v => '¥'+fmtK(v) } }, scales: { x: { beginAtZero: true }, y: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 11, weight: 'bold' }, anchor: 'end', align: 'end', offset: 4, formatter: v => '¥'+fmtK(v) } }, scales: { x: { beginAtZero: true }, y: { beginAtZero: true, max: 200000, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万', font: { size: 13 } } } } }
 });
 
 new Chart(document.getElementById('combinedMonthViolChart'), {
