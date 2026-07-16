@@ -3098,7 +3098,7 @@ new Chart(document.getElementById('combinedMonthAmountChart'), {
 new Chart(document.getElementById('combinedMonthViolChart'), {
     type: 'line',
     data: { labels: ["4月", "5月", "6月"], datasets: [{ label: '进店次数', data: [113, 123, 57], borderColor: '#e74c3c', backgroundColor: 'rgba(231,76,60,0.1)', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: '#e74c3c' }] },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#e74c3c', font: { size: 13, weight: 'bold' }, anchor: 'end', align: 'top', offset: 6 } }, scales: { y: { beginAtZero: true, max: 128 } } }
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#e74c3c', font: { size: 13, weight: 'bold' }, anchor: 'end', align: 'top', offset: 6 } }, scales: { y: { beginAtZero: true, max: 145, ticks: { font: { size: 13 } } } } }
 });
 
 // === 门店考核金额排名 ===
