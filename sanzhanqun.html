@@ -3107,7 +3107,7 @@ new Chart(document.getElementById('combinedMonthViolChart'), {
 // === 门店考核金额排名 ===
 new Chart(document.getElementById('combinedStoreChart'), {
     type: 'bar',
-    data: { labels: ["极氪家  岳阳临港国际汽车城", "极氪家 怀化国际汽车城", "极氪家 娄底湘阳街", "极氪家 漳州龙文北路", "极氪家丨龙岩汽车城", "极氪家 宜宾飞云路", "极氪家 常德湘西北汽车城", "极氪家  银川金凤工业园", "极氪家 泸州蓝安路店", "极氪家  兰州金岛汽车城", "极氪家 大理泛亚汽车城", "极氪家  遵义董公寺汽贸城"], datasets: [{ label: '考核金额(元)', data: [30000, 23000, 18000, 16000, 16000, 15000, 14800, 14000, 14000, 13800, 13000, 13000], backgroundColor: [["'#e74c3c'", "'#e74c3c'", "'#e74c3c'", "'#e74c3c'", "'#e74c3c'", "'#f39c12'", "'#e74c3c'", "'#2ecc71'", "'#f39c12'", "'#2ecc71'", "'#f39c12'", "'#f39c12'"]], borderRadius: 4 }] },
+    data: { labels: ["极氪家  岳阳临港国际汽车城", "极氪家 怀化国际汽车城", "极氪家 娄底湘阳街", "极氪家 漳州龙文北路", "极氪家丨龙岩汽车城", "极氪家 宜宾飞云路", "极氪家 常德湘西北汽车城", "极氪家  银川金凤工业园", "极氪家 泸州蓝安路店", "极氪家  兰州金岛汽车城", "极氪家 大理泛亚汽车城", "极氪家  遵义董公寺汽贸城"], datasets: [{ label: '考核金额(元)', data: [30000, 23000, 18000, 16000, 16000, 15000, 14800, 14000, 14000, 13800, 13000, 13000], backgroundColor: ['#e74c3c', '#e74c3c', '#e74c3c', '#e74c3c', '#e74c3c', '#f39c12', '#e74c3c', '#2ecc71', '#f39c12', '#2ecc71', '#f39c12', '#f39c12'], borderRadius: 4 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, labels: { generateLabels: function(ctx) { return [{text: '西北战区', fillStyle: '#2ecc71'}, {text: '西南战区', fillStyle: '#f39c12'}, {text: '中南战区', fillStyle: '#e74c3c'}]; } } }, datalabels: { display: true, color: '#333', font: { size: 9, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+fmtK(v) } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
 });
 
