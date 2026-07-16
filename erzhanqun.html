@@ -921,7 +921,6 @@ tr:nth-child(even):hover { background: #f0f2f5; }
         </div>
 </div>
 
-</div>
 
 <div class="sub-header">
     <h2>浙江战区详情</h2>
@@ -1255,10 +1254,6 @@ tr:nth-child(even):hover { background: #f0f2f5; }
         <thead><tr><th>排名</th><th>省份</th><th>违规次数</th><th>涉及门店</th><th>考核金额</th></tr></thead>
         <tbody><tr><td>1</td><td>广东</td><td>71</td><td>8</td><td style="color:#e74c3c;font-weight:bold">¥102,600</td></tr><tr><td>2</td><td>浙江</td><td>33</td><td>3</td><td style="color:#e74c3c;font-weight:bold">¥49,400</td></tr><tr><td>3</td><td>海南</td><td>6</td><td>1</td><td style="color:#e74c3c;font-weight:bold">¥9,000</td></tr></tbody>
     </table></div>
-    <div class="chart-row">
-        <div><h3 style="text-align:center;margin-bottom:10px;font-size:15px">省份考核金额分布</h3><div class="chart-container" style="height:300px"><canvas id="combinedProvChart"></canvas></div></div>
-        <div><h3 style="text-align:center;margin-bottom:10px;font-size:15px">省份违规次数分布</h3><div class="chart-container" style="height:300px"><canvas id="combinedProvViolChart"></canvas></div></div>
-    </div>
 </div>
 
 <!-- 七、合并检核项分析 -->
@@ -1268,10 +1263,6 @@ tr:nth-child(even):hover { background: #f0f2f5; }
         <thead><tr><th>排名</th><th>检核项</th><th>违规次数</th><th>合计金额</th></tr></thead>
         <tbody><tr><td>1</td><td>消防设施</td><td style="text-align:center">9</td><td style="color:#e74c3c;font-weight:bold">¥18,000</td></tr><tr><td>2</td><td>洽谈室</td><td style="text-align:center">7</td><td style="color:#e74c3c;font-weight:bold">¥14,000</td></tr><tr><td>3</td><td>展车5S</td><td style="text-align:center">6</td><td style="color:#e74c3c;font-weight:bold">¥12,000</td></tr><tr><td>4</td><td>车身物料</td><td style="text-align:center">6</td><td style="color:#e74c3c;font-weight:bold">¥12,000</td></tr><tr><td>5</td><td>展示状态</td><td style="text-align:center">8</td><td style="color:#e74c3c;font-weight:bold">¥8,000</td></tr><tr><td>6</td><td>影音会员</td><td style="text-align:center">4</td><td style="color:#e74c3c;font-weight:bold">¥8,000</td></tr><tr><td>7</td><td>效期标准</td><td style="text-align:center">3</td><td style="color:#e74c3c;font-weight:bold">¥6,000</td></tr><tr><td>8</td><td>道具洋酒</td><td style="text-align:center">3</td><td style="color:#e74c3c;font-weight:bold">¥6,000</td></tr><tr><td>9</td><td>试驾车5S</td><td style="text-align:center">5</td><td style="color:#e74c3c;font-weight:bold">¥5,000</td></tr><tr><td>10</td><td>展示区</td><td style="text-align:center">2</td><td style="color:#e74c3c;font-weight:bold">¥4,000</td></tr></tbody>
     </table></div>
-    <div class="chart-row">
-        <div><h3 style="text-align:center;margin-bottom:10px;font-size:15px">检核项金额TOP10</h3><div class="chart-container" style="height:350px"><canvas id="combinedItemAmountChart"></canvas></div></div>
-        <div><h3 style="text-align:center;margin-bottom:10px;font-size:15px">检核项次数TOP10</h3><div class="chart-container" style="height:350px"><canvas id="combinedItemCountChart"></canvas></div></div>
-    </div>
 </div>
 
 <!-- 八、合并门店排名 -->
@@ -1307,31 +1298,9 @@ new Chart(document.getElementById('combinedMonthViolChart'), {
     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#e74c3c', font: { size: 13, weight: 'bold' }, anchor: 'end', align: 'top', offset: 6 } }, scales: { y: { beginAtZero: true, max: 12 } } }
 });
 
-// === 合并省份图表 ===
-new Chart(document.getElementById('combinedProvChart'), {
-    type: 'bar',
-    data: { labels: ["广东", "浙江", "海南"], datasets: [{ label: '考核金额(元)', data: [102600, 49400, 9000], backgroundColor: ['#e74c3c','#3498db','#2ecc71'], borderRadius: 4 }] },
-    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 11, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+(v/10000).toFixed(1)+'万' } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(0)+'万' } } } }
-});
 
-new Chart(document.getElementById('combinedProvViolChart'), {
-    type: 'bar',
-    data: { labels: ["广东", "浙江", "海南"], datasets: [{ label: '违规次数', data: [71, 33, 6], backgroundColor: ['#e74c3c','#3498db','#2ecc71'], borderRadius: 4 }] },
-    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 11, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4 } }, scales: { x: { beginAtZero: true } } }
-});
 
-// === 合并检核项图表 ===
-new Chart(document.getElementById('combinedItemAmountChart'), {
-    type: 'bar',
-    data: { labels: ["消防设施", "洽谈室", "展车5S", "车身物料", "展示状态", "影音会员", "效期标准", "道具洋酒", "试驾车5S", "展示区"], datasets: [{ label: '合计金额(元)', data: [18000, 14000, 12000, 12000, 8000, 8000, 6000, 6000, 5000, 4000], backgroundColor: '#e74c3c', borderRadius: 4 }] },
-    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4, formatter: v => '¥'+fmtK(v) } }, scales: { x: { beginAtZero: true, ticks: { callback: v => '¥'+(v/10000).toFixed(1)+'万' } } } }
-});
 
-new Chart(document.getElementById('combinedItemCountChart'), {
-    type: 'bar',
-    data: { labels: ["消防设施", "洽谈室", "展车5S", "车身物料", "展示状态", "影音会员", "效期标准", "道具洋酒", "试驾车5S", "展示区"], datasets: [{ label: '违规次数', data: [9, 7, 6, 6, 8, 4, 3, 3, 5, 2], backgroundColor: '#3498db', borderRadius: 4 }] },
-    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { display: true, color: '#333', font: { size: 10, weight: 'bold' }, anchor: 'end', align: 'right', offset: 4 } }, scales: { x: { beginAtZero: true } } }
-});
 
 // === 合并门店排名图表 ===
 new Chart(document.getElementById('combinedStoreChart'), {
